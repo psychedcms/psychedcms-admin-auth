@@ -4,7 +4,6 @@ import {
     Box,
     Card,
     CardContent,
-    Typography,
     Button,
     Switch,
     Table,
@@ -16,6 +15,7 @@ import {
     CircularProgress,
 } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
+import { PageHeader } from '@psychedcms/admin-core';
 
 const entrypoint = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
@@ -115,22 +115,22 @@ export function RolePermissionsPage() {
     }
 
     return (
-        <Box sx={{ maxWidth: 900, mt: 2 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="h5" fontWeight="bold">
-                    {translate('psyched.permissions.title', { _: 'Role Permissions' })}
-                </Typography>
-                <Button
-                    variant="contained"
-                    startIcon={<SaveIcon />}
-                    onClick={handleSave}
-                    disabled={!hasChanges || saving}
-                >
-                    {saving
-                        ? translate('psyched.settings.saving', { _: 'Saving...' })
-                        : translate('psyched.settings.save', { _: 'Save' })}
-                </Button>
-            </Box>
+        <>
+            <PageHeader
+                title={translate('psyched.permissions.title', { _: 'Role Permissions' })}
+                actions={
+                    <Button
+                        variant="contained"
+                        startIcon={<SaveIcon />}
+                        onClick={handleSave}
+                        disabled={!hasChanges || saving}
+                    >
+                        {saving
+                            ? translate('psyched.settings.saving', { _: 'Saving...' })
+                            : translate('psyched.settings.save', { _: 'Save' })}
+                    </Button>
+                }
+            />
 
             <Card variant="outlined">
                 <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
@@ -190,6 +190,6 @@ export function RolePermissionsPage() {
                     </TableContainer>
                 </CardContent>
             </Card>
-        </Box>
+        </>
     );
 }
