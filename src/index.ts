@@ -16,3 +16,6 @@ registerPlugin({
 });
 
 export { RolePermissionsPage } from './components/RolePermissionsPage.tsx';
+export { ForgotPasswordPage } from './components/ForgotPasswordPage.tsx';
+export { ResetPasswordPage } from './components/ResetPasswordPage.tsx';
+export { PsychedLoginPage } from './components/PsychedLoginPage.tsx';
