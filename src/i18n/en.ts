@@ -50,6 +50,7 @@ export const enMessages = {
             passwords_mismatch: 'Passwords do not match.',
             password_requirements: 'Password must be at least 8 characters with at least one letter and one number.',
             invalid_token: 'The reset link is invalid or expired.',
+            too_many_attempts: 'Too many attempts. Please try again later.',
         },
     },
 };

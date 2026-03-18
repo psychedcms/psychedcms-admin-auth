@@ -40,7 +40,9 @@ export function ResetPasswordPage() {
                 body: JSON.stringify({ token, password }),
             });
 
-            if (response.ok) {
+            if (response.status === 429) {
+                setError(translate('psyched.auth.too_many_attempts'));
+            } else if (response.ok) {
                 setSuccess(true);
             } else {
                 setError(translate('psyched.auth.invalid_token'));

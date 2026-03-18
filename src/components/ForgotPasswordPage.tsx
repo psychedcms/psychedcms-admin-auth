@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from 'react-admin';
-import { Box, Card, CardContent, TextField, Button, Typography, Link as MuiLink } from '@mui/material';
+import { Alert, Box, Card, CardContent, TextField, Button, Typography, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export function ForgotPasswordPage() {
@@ -8,17 +8,25 @@ export function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setError('');
 
         try {
-            await fetch(`${import.meta.env.VITE_API_URL.replace(/\/api$/, '')}/api/forgot-password`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL.replace(/\/api$/, '')}/api/forgot-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
             });
+
+            if (response.status === 429) {
+                setError(translate('psyched.auth.too_many_attempts'));
+                setLoading(false);
+                return;
+            }
         } catch {
             // Silently ignore — always show success (anti-enumeration)
         }
@@ -55,6 +63,11 @@ export function ForgotPasswordPage() {
                         </>
                     ) : (
                         <form onSubmit={handleSubmit}>
+                            {error && (
+                                <Alert severity="error" sx={{ mb: 2 }}>
+                                    {error}
+                                </Alert>
+                            )}
                             <Typography sx={{ mt: 1, mb: 3 }} color="text.secondary">
                                 {translate('psyched.auth.forgot_password_instructions')}
                             </Typography>

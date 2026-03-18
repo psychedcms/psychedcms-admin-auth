@@ -50,6 +50,7 @@ export const frMessages = {
             passwords_mismatch: 'Les mots de passe ne correspondent pas.',
             password_requirements: 'Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.',
             invalid_token: 'Le lien de réinitialisation est invalide ou expiré.',
+            too_many_attempts: 'Trop de tentatives. Veuillez réessayer plus tard.',
         },
     },
 };
