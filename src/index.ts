@@ -11,6 +11,7 @@ registerPlugin({
         component: RolePermissionsPage,
         menuLabel: 'psyched.menu.permissions',
         menuIcon: SecurityIcon,
+        permission: 'users:manage',
     }],
     i18nMessages: { fr: frMessages, en: enMessages },
 });
